@@ -16,6 +16,7 @@
 #include "mbed.h"
 #include <stdio.h>
 #include <errno.h>
+#include <inttypes.h>
 
 // Block devices
 #include "SPIFBlockDevice.h"
@@ -138,14 +139,14 @@ int main() {
 
         // Parse out the number and increment
         int32_t number;
-        fscanf(f, "%d", &number);
+        fscanf(f, "%" PRId32, &number);
         number += 1;
 
         // Seek to beginning of number
         fseek(f, pos, SEEK_SET);
     
         // Store number
-        fprintf(f, "    %d\n", number);
+        fprintf(f, "    %" PRId32 "\n", number);
 
         // Flush between write and read on same file
         fflush(f);
